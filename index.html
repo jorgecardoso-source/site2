@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#09070a">
+    <meta
+        name="description"
+        content="Uma pequena parte da nossa história."
+    >
+
+    <title>Jorge & Bia — Nossa História</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         PRELOADER
+    ====================================================== -->
+
+    <div class="preloader" id="preloader">
+
+        <div class="loader-content">
+
+            <div class="loader-symbol">♡</div>
+
+            <p>
+                PREPARANDO UMA PEQUENA HISTÓRIA
+            </p>
+
+            <div class="loader-bar">
+                <span id="loader-bar"></span>
+            </div>
+
+            <small id="loader-percent">0%</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CURSOR
+    ====================================================== -->
+
+    <div class="cursor"></div>
+    <div class="cursor-follow"></div>
+
+
+    <!-- =====================================================
+         EFEITOS DE FUNDO
+    ====================================================== -->
+
+    <canvas id="particles"></canvas>
+
+    <div class="noise"></div>
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+
+    <!-- =====================================================
+         TOPO
+    ====================================================== -->
+
+    <header class="topbar">
+
+        <a href="#inicio" class="logo">
+            J<span>.</span>B
+        </a>
+
+        <div class="top-date">
+            10.08.2026
+        </div>
+
+        <button
+            class="menu-button"
+            id="menu-button"
+            aria-label="Abrir menu"
+        >
+            <span></span>
+            <span></span>
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+    <nav class="menu" id="menu">
+
+        <div class="menu-content">
+
+            <span class="menu-label">
+                NAVEGAÇÃO
+            </span>
+
+            <a href="#inicio">01 — início</a>
+            <a href="#tempo">02 — tempo</a>
+            <a href="#historia">03 — história</a>
+            <a href="#memorias">04 — memórias</a>
+            <a href="#nos">05 — nós</a>
+            <a href="#final">06 — para você</a>
+
+            <div class="menu-footer">
+                <span>Jorge & Bia</span>
+                <span>∞</span>
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         PROGRESSO LATERAL
+    ====================================================== -->
+
+    <aside class="side-progress">
+
+        <span id="current-section">
+            01
+        </span>
+
+        <div class="progress-track">
+            <span id="progress-fill"></span>
+        </div>
+
+        <span>
+            06
+        </span>
+
+    </aside>
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             01 — HERO
+        ================================================== -->
+
+        <section class="hero section" id="inicio">
+
+            <div class="hero-gradient"></div>
+
+            <div class="hero-content">
+
+                <p class="eyebrow reveal">
+                    UMA HISTÓRIA QUE AINDA ESTÁ SENDO ESCRITA
+                </p>
+
+                <div class="hero-name">
+
+                    <span class="hero-for reveal">
+                        para
+                    </span>
+
+                    <h1 class="reveal">
+                        Bia<span>.</span>
+                    </h1>
+
+                </div>
+
+                <p class="hero-description reveal">
+                    Algumas pessoas passam pela nossa vida.
+                    <br>
+                    Outras fazem a gente querer guardar
+                    <br>
+                    cada detalhe dela.
+                </p>
+
+                <a
+                    href="#tempo"
+                    class="hero-button reveal"
+                >
+                    <span>
+                        começar a história
+                    </span>
+
+                    <strong>
+                        ↓
+                    </strong>
+                </a>
+
+            </div>
+
+            <div class="hero-bottom">
+
+                <span>
+                    SCROLL PARA EXPLORAR
+                </span>
+
+                <span class="hero-bottom-line"></span>
+
+                <span>
+                    01 / 06
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             02 — CONTADOR
+        ================================================== -->
+
+        <section class="time section" id="tempo">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <p class="eyebrow">
+                            DESDE O COMEÇO
+                        </p>
+
+                        <h2>
+                            O tempo passa.
+                            <br>
+                            <em>A memória fica.</em>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="counter-area">
+
+                    <p class="counter-title">
+                        juntos há
+                    </p>
+
+                    <div class="counter">
+
+                        <div class="counter-unit">
+
+                            <strong id="days">
+                                00
+                            </strong>
+
+                            <span>
+                                dias
+                            </span>
+
+                        </div>
+
+
+                        <div class="counter-colon">
+                            :
+                        </div>
+
+
+                        <div class="counter-unit">
+
+                            <strong id="hours">
+                                00
+                            </strong>
+
+                            <span>
+                                horas
+                            </span>
+
+                        </div>
+
+
+                        <div class="counter-colon">
+                            :
+                        </div>
+
+
+                        <div class="counter-unit">
+
+                            <strong id="minutes">
+                                00
+                            </strong>
+
+                            <span>
+                                minutos
+                            </span>
+
+                        </div>
+
+
+                        <div class="counter-colon">
+                            :
+                        </div>
+
+
+                        <div class="counter-unit">
+
+                            <strong id="seconds">
+                                00
+                            </strong>
+
+                            <span>
+                                segundos
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="counter-date">
+                        desde 10 de agosto de 2026
+                    </p>
+
+                </div>
+
+
+                <div class="time-footer">
+
+                    <span>
+                        e a contagem continua
+                    </span>
+
+                    <strong>
+                        ∞
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FRASE
+        ================================================== -->
+
+        <section class="statement section">
+
+            <div class="statement-content">
+
+                <span class="quote-mark">
+                    “
+                </span>
+
+                <p>
+                    No fim, a gente não guarda
+                    todos os dias.
+                    <br><br>
+                    Guarda aqueles que
+                    <em>fizeram sentido.</em>
+                </p>
+
+                <div class="statement-line"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             03 — HISTÓRIA
+        ================================================== -->
+
+        <section class="history section" id="historia">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-number">
+                        03
+                    </span>
+
+                    <div>
+
+                        <p class="eyebrow">
+                            NOSSA HISTÓRIA
+                        </p>
+
+                        <h2>
+                            Algumas coisas
+                            <br>
+                            <em>merecem ser lembradas.</em>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline">
+
+
+                    <article class="timeline-item">
+
+                        <div class="timeline-marker">
+                            01
+                        </div>
+
+                        <div class="timeline-info">
+
+                            <span>
+                                10.08.2026
+                            </span>
+
+                            <h3>
+                                O começo.
+                            </h3>
+
+                            <p>
+                                Um dia que acabou se tornando
+                                o primeiro capítulo de uma
+                                história que ainda está sendo
+                                escrita.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="timeline-item">
+
+                        <div class="timeline-marker">
+                            02
+                        </div>
+
+                        <div class="timeline-info">
+
+                            <span>
+                                DEPOIS
+                            </span>
+
+                            <h3>
+                                Vieram os momentos.
+                            </h3>
+
+                            <p>
+                                Conversas, risadas, situações
+                                aleatórias e pequenas coisas
+                                que começaram a significar
+                                muito.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="timeline-item">
+
+                        <div class="timeline-marker">
+                            03
+                        </div>
+
+                        <div class="timeline-info">
+
+                            <span>
+                                HOJE
+                            </span>
+
+                            <h3>
+                                E ainda é só o começo.
+                            </h3>
+
+                            <p>
+                                Porque talvez a melhor parte
+                                de uma história seja saber que
+                                ainda existem muitos capítulos
+                                que ninguém escreveu.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <div class="timeline-line"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             04 — MEMÓRIAS
+        ================================================== -->
+
+        <section class="memories section" id="memorias">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-number">
+                        04
+                    </span>
+
+                    <div>
+
+                        <p class="eyebrow">
+                            TRÊS MEMÓRIAS
+                        </p>
+
+                        <h2>
+                            Porque às vezes
+                            <br>
+                            <em>três fotos dizem tudo.</em>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="gallery">
+
+
+                    <!-- FOTO 01 -->
+
+                    <button
+                        class="memory memory-main"
+                        data-image="fotos/foto1.jpeg"
+                        data-number="01"
+                        data-title="Uma memória nossa"
+                    >
+
+                        <img
+                            src="fotos/foto1.jpeg"
+                            alt="Uma memória nossa"
+                        >
+
+                        <div class="memory-overlay">
+
+                            <div>
+
+                                <span>
+                                    01
+                                </span>
+
+                                <strong>
+                                    abrir memória
+                                </strong>
+
+                            </div>
+
+                            <i>
+                                ↗
+                            </i>
+
+                        </div>
+
+                    </button>
+
+
+                    <!-- FOTO 02 -->
+
+                    <button
+                        class="memory memory-second"
+                        data-image="fotos/foto2.jpeg"
+                        data-number="02"
+                        data-title="Um momento especial"
+                    >
+
+                        <img
+                            src="fotos/foto2.jpeg"
+                            alt="Um momento especial"
+                        >
+
+                        <div class="memory-overlay">
+
+                            <div>
+
+                                <span>
+                                    02
+                                </span>
+
+                                <strong>
+                                    abrir memória
+                                </strong>
+
+                            </div>
+
+                            <i>
+                                ↗
+                            </i>
+
+                        </div>
+
+                    </button>
+
+
+                    <!-- FOTO 03 -->
+
+                    <button
+                        class="memory memory-third"
+                        data-image="fotos/foto3.jpeg"
+                        data-number="03"
+                        data-title="Mais uma lembrança"
+                    >
+
+                        <img
+                            src="fotos/foto3.jpeg"
+                            alt="Mais uma lembrança"
+                        >
+
+                        <div class="memory-overlay">
+
+                            <div>
+
+                                <span>
+                                    03
+                                </span>
+
+                                <strong>
+                                    abrir memória
+                                </strong>
+
+                            </div>
+
+                            <i>
+                                ↗
+                            </i>
+
+                        </div>
+
+                    </button>
+
+                </div>
+
+
+                <p class="gallery-caption">
+                    três momentos.
+                    <span>incontáveis histórias.</span>
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             05 — NÓS
+        ================================================== -->
+
+        <section class="about section" id="nos">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-number">
+                        05
+                    </span>
+
+                    <div>
+
+                        <p class="eyebrow">
+                            SOBRE NÓS
+                        </p>
+
+                        <h2>
+                            Não é sobre ter
+                            <br>
+                            uma história perfeita.
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="about-text">
+
+                    <p class="large-text">
+                        É sobre ter alguém com quem
+                        <em>valha a pena viver os dias.</em>
+                    </p>
+
+                    <p>
+                        Talvez daqui a alguns anos a gente
+                        olhe para essas fotos e perceba o
+                        quanto mudou.
+                    </p>
+
+                    <p>
+                        Talvez a gente ria das coisas que
+                        hoje parecem importantes.
+                    </p>
+
+                    <p>
+                        Talvez existam centenas de fotos
+                        novas, lugares novos e histórias
+                        que ainda nem imaginamos.
+                    </p>
+
+                    <p class="highlight">
+                        Mas eu quero continuar tendo você
+                        em cada novo capítulo.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FINAL
+        ================================================== -->
+
+        <section class="final section" id="final">
+
+            <div class="final-content">
+
+                <span class="final-small">
+                    E ENTÃO...
+                </span>
+
+                <div class="final-heart">
+                    ♡
+                </div>
+
+                <h2>
+                    Para você,
+                    <em>Bia.</em>
+                </h2>
+
+                <p>
+                    Que esse pequeno cantinho
+                    cresça junto com a nossa história.
+                </p>
+
+                <div class="final-signature">
+
+                    <span>
+                        com amor,
+                    </span>
+
+                    <strong>
+                        Jorge
+                    </strong>
+
+                </div>
+
+
+                <button
+                    class="secret-button"
+                    id="secret-button"
+                >
+                    <span>•</span>
+                    existe algo escondido aqui
+                    <span>•</span>
+                </button>
+
+            </div>
+
+
+            <div class="final-bottom">
+
+                <span>
+                    JORGE & BIA
+                </span>
+
+                <span>
+                    10.08.2026 — ∞
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         MODAL DA FOTO
+    ====================================================== -->
+
+    <div class="photo-modal" id="photo-modal">
+
+        <button
+            class="modal-close"
+            id="modal-close"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+
+        <div class="modal-content">
+
+            <div class="modal-image-wrap">
+
+                <img
+                    id="modal-image"
+                    src=""
+                    alt=""
+                >
+
+            </div>
+
+            <div class="modal-info">
+
+                <span id="modal-number">
+                    01
+                </span>
+
+                <h3 id="modal-title">
+                    Uma memória nossa
+                </h3>
+
+                <p>
+                    algumas lembranças
+                    merecem ser revisitadas.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SEGREDO
+    ====================================================== -->
+
+    <div class="secret-modal" id="secret-modal">
+
+        <div class="secret-box">
+
+            <button
+                id="secret-close"
+                class="secret-close"
+            >
+                ×
+            </button>
+
+            <span class="secret-symbol">
+                ♡
+            </span>
+
+            <p class="eyebrow">
+                VOCÊ ENCONTROU
+            </p>
+
+            <h2>
+                Uma coisa que
+                <em>eu escondi.</em>
+            </h2>
+
+            <p>
+                Se você chegou até aqui,
+                então provavelmente percebeu
+                que esse site nunca foi
+                realmente sobre fotos.
+            </p>
+
+            <strong>
+                Era só uma desculpa para dizer
+                que eu amo ter você na minha vida.
+            </strong>
+
+            <span class="secret-final">
+                ❤️
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SCRIPT
+    ====================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
