@@ -1,912 +1,1179 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="#070509">
-    <meta name="description" content="Uma experiência sobre nós.">
+  <meta name="theme-color" content="#07070a">
+  <meta
+    name="description"
+    content="Uma pequena história sobre nós."
+  >
 
-    <title>10.08.2026 — Bia</title>
+  <title>Para Bia — 10.08.2026</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =====================================================
-         PRELOADER
-    ====================================================== -->
+  <!-- =========================================================
+       PRELOADER
+  ========================================================== -->
 
-    <div id="preloader">
+  <div id="preloader" class="preloader">
 
-        <div class="preloader-inner">
+    <div class="loader-content">
 
-            <div class="preloader-symbol">
-                ∞
-            </div>
+      <div class="loader-symbol">
+        ♡
+      </div>
 
-            <div class="preloader-line">
-                <span id="loader-fill"></span>
-            </div>
+      <div class="loader-title">
+        PARA BIA
+      </div>
 
-            <div class="preloader-meta">
-                <span>CARREGANDO</span>
-                <span id="loader-percent">00</span>
-            </div>
+      <div class="loader-subtitle">
+        preparando uma pequena história...
+      </div>
 
+      <div class="loader-progress">
+
+        <div class="loader-progress-track">
+          <span id="loaderBar"></span>
         </div>
+
+        <div class="loader-percent">
+          <span id="loaderPercent">0</span>%
+        </div>
+
+      </div>
 
     </div>
 
+  </div>
 
-    <!-- =====================================================
-         CURSOR
-    ====================================================== -->
 
+  <!-- =========================================================
+       CAMADAS VISUAIS
+  ========================================================== -->
+
+  <canvas id="stars"></canvas>
+
+  <div class="ambient-glow glow-one"></div>
+  <div class="ambient-glow glow-two"></div>
+
+  <div class="grain"></div>
+  <div class="vignette"></div>
+
+
+  <!-- =========================================================
+       CURSOR
+  ========================================================== -->
+
+  <div class="custom-cursor" id="cursor">
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
+  </div>
 
 
-    <!-- =====================================================
-         AMBIENTE
-    ====================================================== -->
+  <!-- =========================================================
+       TOPO
+  ========================================================== -->
 
-    <canvas id="stars"></canvas>
+  <header class="topbar">
 
-    <div class="grain"></div>
-
-    <div class="ambient ambient-a"></div>
-    <div class="ambient ambient-b"></div>
-
-
-    <!-- =====================================================
-         NAV
-    ====================================================== -->
-
-    <header class="nav">
-
-        <a href="#hero" class="brand">
-            J<span>/</span>B
-        </a>
-
-        <div class="nav-center">
-            10 · 08 · 2026
-        </div>
-
-        <button
-            class="nav-menu"
-            id="menuToggle"
-            type="button"
-            aria-label="Abrir navegação"
-        >
-            <span></span>
-            <span></span>
-        </button>
-
-    </header>
-
-
-    <!-- =====================================================
-         MENU
-    ====================================================== -->
-
-    <div class="fullscreen-menu" id="fullscreenMenu">
-
-        <div class="menu-background-number">
-            01
-        </div>
-
-        <div class="menu-inner">
-
-            <span class="menu-overline">
-                NOSSA HISTÓRIA
-            </span>
-
-            <a href="#hero">Início</a>
-            <a href="#origin">O começo</a>
-            <a href="#timeline">A história</a>
-            <a href="#memories">Memórias</a>
-            <a href="#future">Daqui pra frente</a>
-
-            <div class="menu-footer">
-                <span>JORGE & BIA</span>
-                <span>∞</span>
-            </div>
-
-        </div>
-
+    <div class="brand">
+      B<span>♡</span>
     </div>
 
-
-    <!-- =====================================================
-         PROGRESSO
-    ====================================================== -->
-
-    <aside class="page-indicator">
-
-        <span id="pageCurrent">01</span>
-
-        <div class="page-track">
-            <span id="pageFill"></span>
-        </div>
-
-        <span>05</span>
-
-    </aside>
-
-
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-
-    <main>
-
-
-        <!-- =================================================
-             HERO / PRÓLOGO
-        ================================================== -->
-
-        <section class="hero scene" id="hero">
-
-            <div class="hero-orbit orbit-one"></div>
-            <div class="hero-orbit orbit-two"></div>
-
-            <div class="hero-content">
-
-                <span class="hero-kicker">
-                    ARQUIVO 001
-                </span>
-
-                <div class="hero-date">
-                    10.08.2026
-                </div>
-
-                <h1>
-                    Bia<span>.</span>
-                </h1>
-
-                <p class="hero-subtitle">
-                    uma pequena experiência
-                    <br>
-                    sobre uma história muito maior.
-                </p>
-
-                <button
-                    class="enter-button"
-                    id="enterButton"
-                    type="button"
-                >
-
-                    <span class="enter-circle">
-                        →
-                    </span>
-
-                    <span>
-                        entrar
-                    </span>
-
-                </button>
-
-            </div>
-
-            <div class="hero-bottom">
-
-                <span>
-                    UMA HISTÓRIA
-                </span>
-
-                <span class="hero-scroll">
-                    ↓
-                </span>
-
-                <span>
-                    01 — 05
-                </span>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             ORIGEM
-        ================================================== -->
-
-        <section class="origin scene" id="origin">
-
-            <div class="origin-number">
-                10
-            </div>
-
-            <div class="origin-content">
-
-                <span class="eyebrow">
-                    O PRIMEIRO CAPÍTULO
-                </span>
-
-                <h2>
-                    Algumas datas
-                    <br>
-                    <em>mudam de significado.</em>
-                </h2>
-
-                <p>
-                    Antes era apenas um dia no calendário.
-                    Agora é uma lembrança.
-                </p>
-
-                <div class="origin-date">
-                    <span>10</span>
-                    <i>/</i>
-                    <span>08</span>
-                    <i>/</i>
-                    <span>26</span>
-                </div>
-
-                <div class="origin-line"></div>
-
-                <p class="origin-small">
-                    E foi assim que uma data deixou de ser
-                    apenas uma data.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             CONTADOR
-        ================================================== -->
-
-        <section class="time scene">
-
-            <div class="time-inner">
-
-                <span class="eyebrow">
-                    DESDE ENTÃO
-                </span>
-
-                <h2>
-                    O relógio continua.
-                </h2>
-
-                <p class="time-description">
-                    Mas algumas coisas não parecem passar.
-                </p>
-
-                <div class="counter">
-
-                    <div class="counter-block">
-                        <strong id="days">00</strong>
-                        <span>dias</span>
-                    </div>
-
-                    <div class="counter-separator">:</div>
-
-                    <div class="counter-block">
-                        <strong id="hours">00</strong>
-                        <span>horas</span>
-                    </div>
-
-                    <div class="counter-separator">:</div>
-
-                    <div class="counter-block">
-                        <strong id="minutes">00</strong>
-                        <span>minutos</span>
-                    </div>
-
-                    <div class="counter-separator">:</div>
-
-                    <div class="counter-block">
-                        <strong id="seconds">00</strong>
-                        <span>segundos</span>
-                    </div>
-
-                </div>
-
-                <div class="counter-origin">
-                    10 DE AGOSTO DE 2026
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             TIMELINE
-        ================================================== -->
-
-        <section class="timeline-section scene" id="timeline">
-
-            <div class="section-top">
-
-                <span class="section-index">
-                    02
-                </span>
-
-                <span class="eyebrow">
-                    LINHA DO TEMPO
-                </span>
-
-            </div>
-
-
-            <div class="timeline-intro">
-
-                <h2>
-                    Não dá para
-                    <br>
-                    voltar no tempo.
-                </h2>
-
-                <p>
-                    Mas dá para guardar aquilo que
-                    fez o tempo valer a pena.
-                </p>
-
-            </div>
-
-
-            <div class="timeline-track">
-
-                <div class="timeline-line">
-                    <span id="timelineProgress"></span>
-                </div>
-
-
-                <article class="timeline-card active">
-
-                    <div class="timeline-marker">
-                        01
-                    </div>
-
-                    <div class="timeline-card-content">
-
-                        <span>
-                            10.08.2026
-                        </span>
-
-                        <h3>
-                            O começo.
-                        </h3>
-
-                        <p>
-                            Toda história precisa de um
-                            primeiro capítulo.
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-                <article class="timeline-card">
-
-                    <div class="timeline-marker">
-                        02
-                    </div>
-
-                    <div class="timeline-card-content">
-
-                        <span>
-                            DEPOIS
-                        </span>
-
-                        <h3>
-                            Vieram as memórias.
-                        </h3>
-
-                        <p>
-                            E algumas coisas começaram a
-                            significar muito mais do que
-                            pareciam.
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-                <article class="timeline-card">
-
-                    <div class="timeline-marker">
-                        03
-                    </div>
-
-                    <div class="timeline-card-content">
-
-                        <span>
-                            AGORA
-                        </span>
-
-                        <h3>
-                            Ainda estamos escrevendo.
-                        </h3>
-
-                        <p>
-                            Talvez essa seja a melhor parte:
-                            ainda não sabemos todos os
-                            próximos capítulos.
-                        </p>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             MEMÓRIAS / INTRO
-        ================================================== -->
-
-        <section class="memory-intro scene" id="memories">
-
-            <div class="memory-intro-bg">
-                <span>01</span>
-                <span>02</span>
-                <span>03</span>
-            </div>
-
-            <div>
-
-                <span class="eyebrow">
-                    ARQUIVO DE MEMÓRIAS
-                </span>
-
-                <h2>
-                    Três momentos.
-                    <br>
-                    <em>Uma história.</em>
-                </h2>
-
-                <p>
-                    Clique, explore e deixe cada
-                    lembrança contar sua própria parte.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             MEMÓRIA 01
-        ================================================== -->
-
-        <section class="memory-chapter chapter-one">
-
-            <div class="chapter-number">
-                01
-            </div>
-
-            <div class="chapter-image">
-
-                <button
-                    class="image-button"
-                    data-photo="fotos/foto1.jpeg"
-                    data-title="A primeira memória"
-                    type="button"
-                >
-
-                    <img
-                        src="fotos/foto1.jpeg"
-                        alt="Primeira memória"
-                    >
-
-                    <span class="image-open">
-                        ↗
-                    </span>
-
-                </button>
-
-            </div>
-
-            <div class="chapter-text">
-
-                <span class="eyebrow">
-                    MEMÓRIA 01
-                </span>
-
-                <h2>
-                    Uma imagem
-                    <br>
-                    <em>guarda muito mais.</em>
-                </h2>
-
-                <p>
-                    Tem foto que registra um momento.
-                    E tem foto que consegue fazer a
-                    gente voltar para ele.
-                </p>
-
-                <div class="chapter-footer">
-                    <span>01 / 03</span>
-                    <span>UMA LEMBRANÇA</span>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             MEMÓRIA 02
-        ================================================== -->
-
-        <section class="memory-chapter chapter-two">
-
-            <div class="chapter-number">
-                02
-            </div>
-
-            <div class="chapter-text">
-
-                <span class="eyebrow">
-                    MEMÓRIA 02
-                </span>
-
-                <h2>
-                    Algumas coisas
-                    <br>
-                    <em>ficam.</em>
-                </h2>
-
-                <p>
-                    O lugar muda.
-                    O dia passa.
-                    A foto envelhece.
-                    Mas a lembrança continua.
-                </p>
-
-                <div class="chapter-footer">
-                    <span>02 / 03</span>
-                    <span>UM MOMENTO</span>
-                </div>
-
-            </div>
-
-            <div class="chapter-image">
-
-                <button
-                    class="image-button"
-                    data-photo="fotos/foto2.jpeg"
-                    data-title="Uma memória especial"
-                    type="button"
-                >
-
-                    <img
-                        src="fotos/foto2.jpeg"
-                        alt="Segunda memória"
-                    >
-
-                    <span class="image-open">
-                        ↗
-                    </span>
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             MEMÓRIA 03
-        ================================================== -->
-
-        <section class="memory-chapter chapter-three">
-
-            <div class="chapter-number">
-                03
-            </div>
-
-            <div class="chapter-image">
-
-                <button
-                    class="image-button"
-                    data-photo="fotos/foto3.jpeg"
-                    data-title="Uma lembrança para guardar"
-                    type="button"
-                >
-
-                    <img
-                        src="fotos/foto3.jpeg"
-                        alt="Terceira memória"
-                    >
-
-                    <span class="image-open">
-                        ↗
-                    </span>
-
-                </button>
-
-            </div>
-
-            <div class="chapter-text">
-
-                <span class="eyebrow">
-                    MEMÓRIA 03
-                </span>
-
-                <h2>
-                    E essa história
-                    <br>
-                    <em>continua.</em>
-                </h2>
-
-                <p>
-                    Três fotos são apenas três
-                    momentos de uma história que
-                    ainda tem muito espaço para
-                    acontecer.
-                </p>
-
-                <div class="chapter-footer">
-                    <span>03 / 03</span>
-                    <span>AINDA HÁ MUITO POR VIR</span>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             CONSTELAÇÃO
-        ================================================== -->
-
-        <section class="constellation scene">
-
-            <div class="constellation-title">
-
-                <span class="eyebrow">
-                    AS COISAS QUE IMPORTAM
-                </span>
-
-                <h2>
-                    No meio de bilhões
-                    <br>
-                    de possibilidades...
-                </h2>
-
-            </div>
-
-
-            <div class="constellation-map">
-
-                <div class="star star-a"></div>
-                <div class="star star-b"></div>
-                <div class="star star-c"></div>
-                <div class="star star-d"></div>
-                <div class="star star-e"></div>
-
-                <svg viewBox="0 0 1000 600">
-
-                    <path
-                        d="M150 400 L340 170 L570 360 L760 140 L900 420"
-                    />
-
-                </svg>
-
-                <div class="constellation-word">
-                    <span>algumas pessoas</span>
-                    <strong>simplesmente<br>se encontram.</strong>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             FUTURO
-        ================================================== -->
-
-        <section class="future scene" id="future">
-
-            <div class="future-background">
-                <span>2026</span>
-                <span>2027</span>
-                <span>∞</span>
-            </div>
-
-            <div class="future-content">
-
-                <span class="eyebrow">
-                    CAPÍTULO AINDA NÃO ESCRITO
-                </span>
-
-                <h2>
-                    A melhor parte
-                    <br>
-                    <em>ainda não aconteceu.</em>
-                </h2>
-
-                <p>
-                    Porque ainda existem lugares para conhecer,
-                    fotos para tirar, histórias para contar,
-                    dias bons, dias difíceis, risadas e
-                    milhares de pequenos momentos.
-                </p>
-
-                <div class="future-line"></div>
-
-                <span class="future-question">
-                    e se isso for só o começo?
-                </span>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             FINAL
-        ================================================== -->
-
-        <section class="ending scene">
-
-            <div class="ending-inner">
-
-                <span class="eyebrow">
-                    FIM DO ARQUIVO
-                </span>
-
-                <div class="ending-symbol">
-                    ♡
-                </div>
-
-                <h2>
-                    Para você,
-                    <br>
-                    <em>Bia.</em>
-                </h2>
-
-                <p>
-                    Eu poderia escrever mil coisas aqui.
-                    <br>
-                    Mas talvez seja suficiente dizer:
-                </p>
-
-                <strong class="ending-love">
-                    ainda bem que é você.
-                </strong>
-
-                <div class="signature">
-
-                    <span>
-                        com amor,
-                    </span>
-
-                    <strong>
-                        Jorge
-                    </strong>
-
-                </div>
-
-                <button
-                    class="secret-trigger"
-                    id="secretTrigger"
-                    type="button"
-                >
-                    existe uma última coisa
-                </button>
-
-            </div>
-
-            <div class="ending-bottom">
-
-                <span>
-                    JORGE / BIA
-                </span>
-
-                <span>
-                    10.08.2026 → ∞
-                </span>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =====================================================
-         PHOTO VIEWER
-    ====================================================== -->
-
-    <div class="photo-viewer" id="photoViewer">
-
-        <button
-            class="viewer-close"
-            id="viewerClose"
-            type="button"
-        >
-            ×
-        </button>
-
-        <div class="viewer-image-wrap">
-
-            <img
-                id="viewerImage"
-                src=""
-                alt=""
-            >
-
-        </div>
-
-        <div class="viewer-caption">
-
-            <span id="viewerTitle">
-                MEMÓRIA
-            </span>
-
-            <small>
-                ESC · FECHAR
-            </small>
-
-        </div>
-
+    <div class="top-center">
+      <span id="chapterIndicator">01</span>
+      <span class="top-divider">/</span>
+      <span>10.08.2026</span>
     </div>
 
+    <button
+      class="sound-btn magnetic"
+      id="soundBtn"
+      type="button"
+      aria-label="Ativar ambiente"
+    >
+      <span class="sound-icon">♪</span>
+      <span class="sound-text">ambiente</span>
+    </button>
 
-    <!-- =====================================================
-         SEGREDO
-    ====================================================== -->
+  </header>
 
-    <div class="secret" id="secret">
 
-        <div class="secret-card">
+  <!-- =========================================================
+       NAVEGAÇÃO LATERAL
+  ========================================================== -->
 
-            <button
-                id="secretClose"
-                type="button"
-            >
-                ×
-            </button>
+  <nav class="side-nav" id="sideNav">
 
-            <span class="secret-heart">
-                ♥
+    <button data-target="hero" class="nav-dot active">
+      <span>01</span>
+    </button>
+
+    <button data-target="beginning" class="nav-dot">
+      <span>02</span>
+    </button>
+
+    <button data-target="days" class="nav-dot">
+      <span>03</span>
+    </button>
+
+    <button data-target="first" class="nav-dot">
+      <span>04</span>
+    </button>
+
+    <button data-target="real" class="nav-dot">
+      <span>05</span>
+    </button>
+
+    <button data-target="know" class="nav-dot">
+      <span>06</span>
+    </button>
+
+    <button data-target="time" class="nav-dot">
+      <span>07</span>
+    </button>
+
+    <button data-target="evolution" class="nav-dot">
+      <span>08</span>
+    </button>
+
+    <button data-target="future" class="nav-dot">
+      <span>09</span>
+    </button>
+
+    <button data-target="quote" class="nav-dot">
+      <span>10</span>
+    </button>
+
+    <button data-target="ending" class="nav-dot">
+      <span>∞</span>
+    </button>
+
+  </nav>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main id="main">
+
+
+    <!-- =======================================================
+         HERO
+    ======================================================== -->
+
+    <section
+      class="hero scene"
+      id="hero"
+      data-chapter="01"
+    >
+
+      <div class="hero-noise"></div>
+
+      <div class="hero-orbit orbit-one"></div>
+      <div class="hero-orbit orbit-two"></div>
+      <div class="hero-orbit orbit-three"></div>
+
+      <div class="hero-center">
+
+        <div class="hero-date reveal">
+          10 · 08 · 2026
+        </div>
+
+        <div class="hero-line"></div>
+
+        <p class="eyebrow reveal delay-one">
+          UMA HISTÓRIA QUE COMEÇOU SEM AVISAR
+        </p>
+
+        <h1 class="hero-title reveal delay-two">
+          Bia<span>.</span>
+        </h1>
+
+        <p class="hero-subtitle reveal delay-three">
+          Algumas histórias começam com grandes acontecimentos.
+          <br>
+          A nossa começou com uma mensagem.
+        </p>
+
+        <button
+          class="enter-btn magnetic reveal delay-four"
+          id="startBtn"
+          type="button"
+        >
+
+          <span>
+            entrar na nossa história
+          </span>
+
+          <b>
+            ↓
+          </b>
+
+        </button>
+
+      </div>
+
+      <div class="hero-bottom">
+
+        <span>
+          01
+        </span>
+
+        <div class="hero-scroll-line">
+          <span></span>
+        </div>
+
+        <span>
+          continue
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CAPÍTULO 01
+    ======================================================== -->
+
+    <section
+      class="chapter scene"
+      id="beginning"
+      data-chapter="02"
+    >
+
+      <div class="chapter-number">
+        01
+      </div>
+
+      <div class="chapter-inner">
+
+        <div class="section-label reveal">
+          10 DE AGOSTO DE 2026
+        </div>
+
+        <h2 class="section-title reveal">
+          Eu não fazia ideia.
+        </h2>
+
+        <p class="lead reveal">
+          Uma mensagem que parecia simples naquele momento
+          acabou se tornando o começo de algo que eu jamais
+          teria imaginado.
+        </p>
+
+        <div class="typing-card reveal">
+
+          <div class="typing-top">
+
+            <span>
+              PRIMEIRA PÁGINA
             </span>
 
-            <span class="eyebrow">
-                ARQUIVO CONFIDENCIAL
+            <span>
+              10.08.2026
             </span>
 
-            <h2>
-                Você chegou
-                <br>
-                até o fim.
-            </h2>
+          </div>
+
+          <div class="typing-content">
+
+            <span class="quote-mark-small">
+              “
+            </span>
+
+            <p id="typedMessage"></p>
+
+            <span class="typing-cursor">
+              |
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="two-column-text reveal">
+
+          <p>
+            Eu já achava você linda.
+            Mas ainda não conhecia a pessoa incrível
+            que existia por trás daquele sorriso.
+          </p>
+
+          <p>
+            Eu não fazia ideia de onde aquela simples
+            mensagem iria nos levar.
+          </p>
+
+        </div>
+
+        <div class="floating-date">
+          10<br>
+          <span>AGO</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CAPÍTULO 02
+    ======================================================== -->
+
+    <section
+      class="chapter days-section scene"
+      id="days"
+      data-chapter="03"
+    >
+
+      <div class="chapter-number">
+        02
+      </div>
+
+      <div class="days-grid">
+
+        <div class="days-copy">
+
+          <div class="section-label reveal">
+            E ENTÃO...
+          </div>
+
+          <h2 class="section-title reveal">
+            Você começou a fazer parte dos meus dias.
+          </h2>
+
+          <p class="body-copy reveal">
+            Primeiro foram as mensagens.
+            Depois, a vontade de saber mais.
+          </p>
+
+          <div class="memory-pills reveal">
+
+            <span>seus gostos</span>
+            <span>seus pensamentos</span>
+            <span>suas histórias</span>
+            <span>suas manias</span>
+            <span>seus sonhos</span>
+            <span>suas pequenas coisas</span>
+
+          </div>
+
+          <div class="highlight-box reveal">
+
+            <span class="highlight-line"></span>
 
             <p>
-                Então deixa eu te contar uma coisa
-                que não cabia em nenhuma das outras
-                partes desse site.
+              Até que conversar com você deixou de ser
+              apenas uma parte do meu dia.
             </p>
 
             <strong>
-                Eu faria tudo isso de novo,
-                só para poder viver cada momento
-                com você outra vez.
+              Você passou a fazer parte dele.
             </strong>
 
-            <div class="secret-end">
-                ∞
-            </div>
+          </div>
 
         </div>
 
+
+        <div class="conversation-space">
+
+          <div class="conversation-orbit"></div>
+
+          <div class="floating-message message-one">
+            bom dia
+          </div>
+
+          <div class="floating-message message-two">
+            olha isso
+          </div>
+
+          <div class="floating-message message-three">
+            lembrei de você
+          </div>
+
+          <div class="floating-message message-four">
+            me conta
+          </div>
+
+          <div class="floating-message message-five">
+            KKKKK
+          </div>
+
+          <div class="floating-message message-six">
+            boa noite
+          </div>
+
+          <div class="conversation-center">
+            <span>
+              todos os dias
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FOTO 01
+    ======================================================== -->
+
+    <section
+      class="photo-chapter scene"
+      id="first"
+      data-chapter="04"
+    >
+
+      <div class="chapter-number">
+        03
+      </div>
+
+      <div class="photo-layout">
+
+        <div class="photo-container reveal">
+
+          <button
+            class="photo-card"
+            data-photo="fotos/foto1.jpeg"
+            data-caption="30.08.2026 — o dia em que a pessoa das mensagens estava ali, na minha frente."
+            type="button"
+          >
+
+            <div class="photo-number">
+              01
+            </div>
+
+            <img
+              src="fotos/foto1.jpeg"
+              alt="Uma lembrança nossa"
+            >
+
+            <div class="photo-overlay"></div>
+
+            <span class="photo-open">
+              abrir lembrança ↗
+            </span>
+
+          </button>
+
+        </div>
+
+
+        <div class="photo-copy">
+
+          <div class="section-label reveal">
+            30.08.2026
+          </div>
+
+          <h2 class="section-title reveal">
+            O dia em que tudo ficou real.
+          </h2>
+
+          <p class="body-copy reveal">
+            Primeiro abraço.
+            Primeiro beijo.
+            Primeira vez segurando sua mão.
+          </p>
+
+          <p class="body-copy muted reveal">
+            Eu lembro daquele momento e ainda parece meio
+            surreal pensar que aquela pessoa com quem eu
+            conversava todos os dias finalmente estava ali,
+            na minha frente.
+          </p>
+
+          <blockquote class="memory-quote reveal">
+            <span>“</span>
+            Existia algo muito maior acontecendo aqui.
+          </blockquote>
+
+          <div class="date-stamp reveal">
+            <span>
+              ARQUIVO
+            </span>
+
+            <strong>
+              30.08.26
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CAPÍTULO 04
+    ======================================================== -->
+
+    <section
+      class="truth-section scene"
+      id="real"
+      data-chapter="05"
+    >
+
+      <div class="chapter-number">
+        04
+      </div>
+
+      <div class="truth-background">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <div class="truth-content">
+
+        <div class="section-label reveal">
+          E SABE O QUE EU MAIS GOSTO?
+        </div>
+
+        <h2 class="giant-word reveal">
+          Não foi perfeito.
+        </h2>
+
+        <div class="truth-lines">
+
+          <div class="truth-line reveal">
+            <span>01</span>
+            <p>Tivemos risadas.</p>
+          </div>
+
+          <div class="truth-line reveal">
+            <span>02</span>
+            <p>Tivemos medo.</p>
+          </div>
+
+          <div class="truth-line reveal">
+            <span>03</span>
+            <p>Tivemos momentos difíceis.</p>
+          </div>
+
+          <div class="truth-line reveal">
+            <span>04</span>
+            <p>Tivemos divergências.</p>
+          </div>
+
+        </div>
+
+        <p class="truth-lead reveal">
+          E mesmo assim,
+          <br>
+          continuamos aqui.
+        </p>
+
+        <div class="truth-final reveal">
+
+          <p>
+            Talvez seja justamente isso
+            que faça tudo ser tão especial.
+          </p>
+
+          <strong>
+            Eu não encontrei uma história perfeita.
+            <br>
+            Eu encontrei uma história real.
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FOTO 02
+    ======================================================== -->
+
+    <section
+      class="photo-chapter reverse-photo scene"
+      id="know"
+      data-chapter="06"
+    >
+
+      <div class="chapter-number">
+        05
+      </div>
+
+      <div class="photo-layout reverse">
+
+        <div class="photo-copy">
+
+          <div class="section-label reveal">
+            QUANTO MAIS EU CONHEÇO VOCÊ
+          </div>
+
+          <h2 class="section-title reveal">
+            Mais eu quero conhecer.
+          </h2>
+
+          <p class="body-copy reveal">
+            Não quero conhecer somente a sua parte bonita.
+          </p>
+
+          <div class="traits-list reveal">
+
+            <div>
+              <span>01</span>
+              seus medos
+            </div>
+
+            <div>
+              <span>02</span>
+              suas inseguranças
+            </div>
+
+            <div>
+              <span>03</span>
+              suas manias
+            </div>
+
+            <div>
+              <span>04</span>
+              seus defeitos
+            </div>
+
+            <div>
+              <span>05</span>
+              seus sonhos
+            </div>
+
+          </div>
+
+          <p class="highlight-text reveal">
+            Quero conhecer você por inteiro.
+          </p>
+
+          <p class="body-copy muted reveal">
+            E mesmo descobrindo cada nova parte sua,
+            eu continuo escolhendo ficar.
+          </p>
+
+        </div>
+
+
+        <div class="photo-container reveal">
+
+          <button
+            class="photo-card tall"
+            data-photo="fotos/foto2.jpeg"
+            data-caption="Cada detalhe seu faz parte da pessoa que eu escolhi conhecer."
+            type="button"
+          >
+
+            <div class="photo-number">
+              02
+            </div>
+
+            <img
+              src="fotos/foto2.jpeg"
+              alt="Outra lembrança nossa"
+            >
+
+            <div class="photo-overlay"></div>
+
+            <span class="photo-open">
+              abrir lembrança ↗
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CONTADOR
+    ======================================================== -->
+
+    <section
+      class="counter-section scene"
+      id="time"
+      data-chapter="07"
+    >
+
+      <div class="chapter-number">
+        06
+      </div>
+
+      <div class="counter-content">
+
+        <div class="section-label reveal">
+          DESDE AQUELE DIA
+        </div>
+
+        <h2 class="section-title reveal">
+          O tempo que já vivemos.
+        </h2>
+
+        <div class="counter-grid reveal">
+
+          <div class="counter-unit">
+            <strong id="daysCount">000</strong>
+            <span>dias</span>
+          </div>
+
+          <div class="counter-unit">
+            <strong id="hoursCount">00</strong>
+            <span>horas</span>
+          </div>
+
+          <div class="counter-unit">
+            <strong id="minutesCount">00</strong>
+            <span>minutos</span>
+          </div>
+
+          <div class="counter-unit">
+            <strong id="secondsCount">00</strong>
+            <span>segundos</span>
+          </div>
+
+        </div>
+
+        <div class="counter-line reveal">
+          <span></span>
+          <small>
+            contando desde 10.08.2026
+          </small>
+          <span></span>
+        </div>
+
+        <p class="counter-message reveal">
+          Dois meses talvez pareçam pouco.
+          <br>
+          <strong>
+            Mas quando olho para tudo que aconteceu,
+            parece muito mais.
+          </strong>
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         EVOLUÇÃO
+    ======================================================== -->
+
+    <section
+      class="evolution-section scene"
+      id="evolution"
+      data-chapter="08"
+    >
+
+      <div class="chapter-number">
+        07
+      </div>
+
+      <div class="evolution-content">
+
+        <div class="section-label reveal">
+          VOCÊ ME FEZ PERCEBER UMA COISA
+        </div>
+
+        <h2 class="section-title reveal">
+          Eu quero evoluir.
+        </h2>
+
+        <p class="evolution-intro reveal">
+          Não porque eu precise me tornar alguém diferente
+          para merecer você.
+        </p>
+
+        <div class="evolution-main reveal">
+
+          <span class="evolution-quote-mark">
+            “
+          </span>
+
+          <p>
+            Mas porque estar ao seu lado me fez querer
+            ser uma versão melhor de mim mesmo.
+          </p>
+
+        </div>
+
+        <div class="evolution-words reveal">
+
+          <span>aprender</span>
+          <span>amadurecer</span>
+          <span>crescer</span>
+          <span>cuidar</span>
+          <span>entender</span>
+          <span>amar</span>
+
+        </div>
+
+        <div class="evolution-final reveal">
+
+          Não apenas por mim.
+
+          <strong>
+            Por nós.
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FUTURO
+    ======================================================== -->
+
+    <section
+      class="future-section scene"
+      id="future"
+      data-chapter="09"
+    >
+
+      <div class="future-stars"></div>
+
+      <div class="future-content">
+
+        <div class="chapter-number">
+          08
+        </div>
+
+        <div class="section-label reveal">
+          E O QUE AINDA NÃO ACONTECEU?
+        </div>
+
+        <h2 class="future-title reveal">
+          É justamente o que mais me deixa feliz.
+        </h2>
+
+        <div class="future-list">
+
+          <p class="reveal">
+            Existem dias que a gente ainda nem viveu.
+          </p>
+
+          <p class="reveal">
+            Conversas que ainda não tivemos.
+          </p>
+
+          <p class="reveal">
+            Lugares onde ainda não fomos.
+          </p>
+
+          <p class="reveal">
+            Risadas que ainda não demos.
+          </p>
+
+          <p class="reveal">
+            Problemas que ainda vamos superar.
+          </p>
+
+          <p class="reveal">
+            Histórias que ainda nem começaram.
+          </p>
+
+        </div>
+
+        <div class="future-final reveal">
+
+          <span>
+            Mas quando penso no futuro...
+          </span>
+
+          <strong>
+            é você que eu consigo imaginar nele.
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FRASE
+    ======================================================== -->
+
+    <section
+      class="quote-section scene"
+      id="quote"
+      data-chapter="10"
+    >
+
+      <div class="quote-light"></div>
+
+      <div class="quote-content">
+
+        <div class="section-label reveal">
+          UMA COISA QUE EU QUERIA TE DIZER
+        </div>
+
+        <div class="big-quote-mark reveal">
+          “
+        </div>
+
+        <blockquote class="long-quote reveal">
+
+          Procurei você sem saber.
+          <br>
+          Te encontrei nas páginas dos livros que li,
+          <br>
+          nos versos das músicas que ouvi
+          <br>
+          e nas cenas dos filmes que assisti.
+          <br><br>
+
+          Te pedi em cada oração,
+          <br>
+          mesmo sem conhecer o seu nome.
+          <br><br>
+
+          Achei que sonhava com um amor de cinema,
+          <br>
+          mas descobri que o amor que encontrei em você
+          <br>
+          é mais bonito do que qualquer história já contada.
+
+        </blockquote>
+
+        <div class="quote-signature reveal">
+          — para Bia.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FOTO 03
+    ======================================================== -->
+
+    <section
+      class="final-photo-section scene"
+      id="lastPhoto"
+    >
+
+      <div class="final-photo-wrapper reveal">
+
+        <button
+          class="final-photo-card"
+          data-photo="fotos/foto3.jpeg"
+          data-caption="E ainda existem tantas páginas que a gente nem escreveu."
+          type="button"
+        >
+
+          <img
+            src="fotos/foto3.jpeg"
+            alt="Uma última lembrança nossa"
+          >
+
+          <div class="final-photo-dark"></div>
+
+          <div class="final-photo-caption">
+
+            <span>
+              AINDA EXISTE TANTO
+            </span>
+
+            <strong>
+              PARA VIVER.
+            </strong>
+
+          </div>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FINAL
+    ======================================================== -->
+
+    <section
+      class="ending scene"
+      id="ending"
+      data-chapter="∞"
+    >
+
+      <div class="ending-background">
+
+        <div class="ending-orbit orbit-a"></div>
+        <div class="ending-orbit orbit-b"></div>
+
+      </div>
+
+      <div class="ending-content">
+
+        <div class="section-label reveal">
+          UM DIA, TALVEZ
+        </div>
+
+        <p class="ending-text reveal">
+          A gente olhe para trás.
+        </p>
+
+        <div class="ending-timeline reveal">
+
+          <span>
+            10.08.2026
+          </span>
+
+          <i>→</i>
+
+          <span>
+            30.08.2026
+          </span>
+
+          <i>→</i>
+
+          <span>
+            tudo que ainda vem
+          </span>
+
+        </div>
+
+        <p class="ending-text reveal">
+          E perceba que tudo aquilo que parecia pequeno...
+        </p>
+
+        <h2 class="ending-title reveal">
+          era só o começo.
+        </h2>
+
+        <p class="ending-description reveal">
+          Eu quero continuar escrevendo essa história com você.
+        </p>
+
+        <div class="final-promise reveal">
+          Até um dia podermos olhar um para o outro e dizer:
+        </div>
+
+        <div class="conseguimos reveal">
+          “Conseguimos.”
+        </div>
+
+        <div class="signature-final reveal">
+
+          <span>
+            Bia. ♡
+          </span>
+
+          <small>
+            10.08.2026 — ∞
+          </small>
+
+        </div>
+
+        <p class="last-line reveal">
+          Ainda bem que aquela mensagem foi enviada.
+        </p>
+
+        <button
+          id="restartBtn"
+          class="restart-btn magnetic reveal"
+          type="button"
+        >
+          ↻ voltar ao começo
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       PROGRESSO
+  ========================================================== -->
+
+  <div class="progress-track">
+    <div
+      class="progress-fill"
+      id="progressBar"
+    ></div>
+  </div>
+
+
+  <!-- =========================================================
+       VISUALIZADOR DE FOTO
+  ========================================================== -->
+
+  <div
+    class="photo-viewer"
+    id="photoViewer"
+    aria-hidden="true"
+  >
+
+    <div class="viewer-background"></div>
+
+    <button
+      class="viewer-close"
+      id="viewerClose"
+      type="button"
+      aria-label="Fechar"
+    >
+      ×
+    </button>
+
+    <div class="viewer-content">
+
+      <div class="viewer-counter">
+        <span id="viewerNumber">01</span>
+        <span>/</span>
+        <span>03</span>
+      </div>
+
+      <img
+        id="viewerImage"
+        src=""
+        alt=""
+      >
+
+      <p id="viewerCaption"></p>
+
     </div>
 
+  </div>
 
-    <script src="script.js"></script>
+
+  <!-- =========================================================
+       TOAST
+  ========================================================== -->
+
+  <div
+    class="toast"
+    id="toast"
+  >
+    <span></span>
+  </div>
+
+
+  <script src="script.js"></script>
 
 </body>
 </html>
