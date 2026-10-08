@@ -2,7 +2,7 @@
    CONFIGURAÇÃO
 ========================================================= */
 
-const DATA_INICIO = new Date(
+const START_DATE = new Date(
     2026,
     7,
     10,
@@ -11,165 +11,222 @@ const DATA_INICIO = new Date(
     0
 );
 
+const prefersReducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
 
 /* =========================================================
    PRELOADER
 ========================================================= */
 
-const preloader = document.getElementById("preloader");
-const loaderBar = document.getElementById("loader-bar");
-const loaderPercent = document.getElementById("loader-percent");
+const preloader =
+    document.getElementById("preloader");
 
-let loadProgress = 0;
+const loaderFill =
+    document.getElementById("loader-fill");
 
-const loaderInterval = setInterval(() => {
+const loaderPercent =
+    document.getElementById("loader-percent");
 
-    loadProgress += Math.floor(Math.random() * 8) + 3;
+let loaderValue = 0;
 
-    if (loadProgress >= 100) {
+const loaderTimer = setInterval(() => {
 
-        loadProgress = 100;
+    loaderValue +=
+        Math.floor(Math.random() * 9) + 4;
 
-        clearInterval(loaderInterval);
+    if (loaderValue >= 100) {
+
+        loaderValue = 100;
+
+        clearInterval(loaderTimer);
 
         setTimeout(() => {
-            preloader.classList.add("hide");
-        }, 400);
+
+            preloader.classList.add("done");
+
+        }, 350);
     }
 
-    loaderBar.style.width = `${loadProgress}%`;
-    loaderPercent.textContent = `${loadProgress}%`;
+    loaderFill.style.width =
+        `${loaderValue}%`;
 
-}, 80);
+    loaderPercent.textContent =
+        String(loaderValue).padStart(2, "0");
+
+}, 70);
 
 
 /* =========================================================
    CONTADOR
 ========================================================= */
 
-function atualizarContador() {
+const daysElement =
+    document.getElementById("days");
 
-    const agora = new Date();
+const hoursElement =
+    document.getElementById("hours");
 
-    let diferenca =
-        agora.getTime() -
-        DATA_INICIO.getTime();
+const minutesElement =
+    document.getElementById("minutes");
 
-    if (diferenca < 0) {
-        diferenca = 0;
+const secondsElement =
+    document.getElementById("seconds");
+
+
+function updateCounter() {
+
+    const now = new Date();
+
+    let difference =
+        now.getTime() -
+        START_DATE.getTime();
+
+    if (difference < 0) {
+        difference = 0;
     }
 
-    const totalSegundos =
-        Math.floor(diferenca / 1000);
+    const totalSeconds =
+        Math.floor(difference / 1000);
 
-    const dias =
-        Math.floor(totalSegundos / 86400);
+    const days =
+        Math.floor(totalSeconds / 86400);
 
-    const horas =
+    const hours =
         Math.floor(
-            (totalSegundos % 86400) / 3600
+            (totalSeconds % 86400) / 3600
         );
 
-    const minutos =
+    const minutes =
         Math.floor(
-            (totalSegundos % 3600) / 60
+            (totalSeconds % 3600) / 60
         );
 
-    const segundos =
-        totalSegundos % 60;
+    const seconds =
+        totalSeconds % 60;
 
 
-    document.getElementById("days").textContent =
-        String(dias).padStart(2, "0");
+    daysElement.textContent =
+        String(days).padStart(2, "0");
 
-    document.getElementById("hours").textContent =
-        String(horas).padStart(2, "0");
+    hoursElement.textContent =
+        String(hours).padStart(2, "0");
 
-    document.getElementById("minutes").textContent =
-        String(minutos).padStart(2, "0");
+    minutesElement.textContent =
+        String(minutes).padStart(2, "0");
 
-    document.getElementById("seconds").textContent =
-        String(segundos).padStart(2, "0");
+    secondsElement.textContent =
+        String(seconds).padStart(2, "0");
 }
 
-atualizarContador();
+updateCounter();
 
-setInterval(
-    atualizarContador,
-    1000
-);
+setInterval(updateCounter, 1000);
 
 
 /* =========================================================
    MENU
 ========================================================= */
 
-const menuButton =
-    document.getElementById("menu-button");
+const menuToggle =
+    document.getElementById("menuToggle");
 
-const menu =
-    document.getElementById("menu");
+const fullscreenMenu =
+    document.getElementById("fullscreenMenu");
 
 const menuLinks =
-    document.querySelectorAll(".menu a");
+    fullscreenMenu.querySelectorAll("a");
 
 
-function fecharMenu() {
+function closeMenu() {
 
-    menu.classList.remove("open");
+    fullscreenMenu.classList.remove("open");
 
-    menuButton.classList.remove("active");
+    menuToggle.classList.remove("open");
 
-    document.body.classList.remove("menu-open");
+    document.body.classList.remove("locked");
+
 }
 
 
-menuButton.addEventListener("click", () => {
+menuToggle.addEventListener(
+    "click",
+    () => {
 
-    const aberto =
-        menu.classList.toggle("open");
+        const open =
+            fullscreenMenu.classList.toggle("open");
 
-    menuButton.classList.toggle(
-        "active",
-        aberto
-    );
+        menuToggle.classList.toggle(
+            "open",
+            open
+        );
 
-    document.body.classList.toggle(
-        "menu-open",
-        aberto
-    );
+        document.body.classList.toggle(
+            "locked",
+            open
+        );
 
-});
+    }
+);
 
 
 menuLinks.forEach(link => {
 
     link.addEventListener(
         "click",
-        fecharMenu
+        closeMenu
     );
 
 });
 
 
 /* =========================================================
+   ENTER BUTTON
+========================================================= */
+
+const enterButton =
+    document.getElementById("enterButton");
+
+enterButton.addEventListener(
+    "click",
+    () => {
+
+        document
+            .getElementById("origin")
+            .scrollIntoView({
+                behavior:
+                    prefersReducedMotion
+                        ? "auto"
+                        : "smooth"
+            });
+
+    }
+);
+
+
+/* =========================================================
    CURSOR
 ========================================================= */
 
-const cursor =
-    document.querySelector(".cursor");
+const cursorDot =
+    document.querySelector(".cursor-dot");
 
-const cursorFollow =
-    document.querySelector(".cursor-follow");
+const cursorRing =
+    document.querySelector(".cursor-ring");
 
 
-if (window.innerWidth > 800) {
+if (
+    window.innerWidth > 800 &&
+    !prefersReducedMotion
+) {
 
     let mouseX = 0;
     let mouseY = 0;
 
-    let followX = 0;
-    let followY = 0;
+    let ringX = 0;
+    let ringY = 0;
 
 
     document.addEventListener(
@@ -179,255 +236,310 @@ if (window.innerWidth > 800) {
             mouseX = event.clientX;
             mouseY = event.clientY;
 
-            cursor.style.left =
+            cursorDot.style.left =
                 `${mouseX}px`;
 
-            cursor.style.top =
+            cursorDot.style.top =
                 `${mouseY}px`;
+
         }
     );
 
 
     function animateCursor() {
 
-        followX +=
-            (mouseX - followX) * .12;
+        ringX +=
+            (mouseX - ringX) * .12;
 
-        followY +=
-            (mouseY - followY) * .12;
+        ringY +=
+            (mouseY - ringY) * .12;
 
-        cursorFollow.style.left =
-            `${followX}px`;
+        cursorRing.style.left =
+            `${ringX}px`;
 
-        cursorFollow.style.top =
-            `${followY}px`;
+        cursorRing.style.top =
+            `${ringY}px`;
 
         requestAnimationFrame(
             animateCursor
         );
+
     }
 
     animateCursor();
 
 
-    const hoverElements =
-        document.querySelectorAll(
-            "a, button"
-        );
+    document
+        .querySelectorAll("a, button")
+        .forEach(element => {
 
+            element.addEventListener(
+                "mouseenter",
+                () => {
+                    cursorRing.classList.add("active");
+                }
+            );
 
-    hoverElements.forEach(element => {
+            element.addEventListener(
+                "mouseleave",
+                () => {
+                    cursorRing.classList.remove("active");
+                }
+            );
 
-        element.addEventListener(
-            "mouseenter",
-            () => {
-                cursorFollow.classList.add("hover");
-            }
-        );
-
-        element.addEventListener(
-            "mouseleave",
-            () => {
-                cursorFollow.classList.remove("hover");
-            }
-        );
-
-    });
+        });
 
 }
 
 
 /* =========================================================
-   REVEAL AO ROLAR
+   PAGE PROGRESS
 ========================================================= */
 
-const revealElements =
-    document.querySelectorAll(".reveal");
+const pageFill =
+    document.getElementById("pageFill");
+
+const pageCurrent =
+    document.getElementById("pageCurrent");
 
 
-const revealObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add(
-                        "visible"
-                    );
-
-                }
-
-            });
-
-        },
-        {
-            threshold: .15
-        }
-    );
-
-
-revealElements.forEach(element => {
-
-    revealObserver.observe(element);
-
-});
-
-
-/* =========================================================
-   PROGRESSO DA PÁGINA
-========================================================= */
-
-const progressFill =
-    document.getElementById("progress-fill");
-
-const currentSection =
-    document.getElementById("current-section");
-
-
-const sections =
+const scenes =
     document.querySelectorAll(
         "main > section"
     );
 
 
-window.addEventListener(
-    "scroll",
-    () => {
+function updatePageProgress() {
 
-        const scrollTop =
-            window.scrollY;
+    const maxScroll =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
 
-        const documentHeight =
-            document.documentElement.scrollHeight -
-            window.innerHeight;
+    const progress =
+        maxScroll > 0
+            ? window.scrollY / maxScroll
+            : 0;
 
-        const percentage =
-            documentHeight > 0
-                ? scrollTop / documentHeight
-                : 0;
+    pageFill.style.height =
+        `${progress * 100}%`;
 
 
-        progressFill.style.height =
-            `${percentage * 100}%`;
+    let current = 1;
 
 
-        let current = 1;
+    scenes.forEach(
+        (scene, index) => {
 
-        sections.forEach(
-            (section, index) => {
+            const rect =
+                scene.getBoundingClientRect();
 
-                const rect =
-                    section.getBoundingClientRect();
-
-                if (
-                    rect.top <=
-                    window.innerHeight * .45
-                ) {
-                    current = index + 1;
-                }
-
+            if (
+                rect.top <
+                window.innerHeight * .45
+            ) {
+                current = index + 1;
             }
-        );
-
-
-        currentSection.textContent =
-            String(current).padStart(2, "0");
-
-    }
-);
-
-
-/* =========================================================
-   MODAL DAS FOTOS
-========================================================= */
-
-const photoModal =
-    document.getElementById("photo-modal");
-
-const modalImage =
-    document.getElementById("modal-image");
-
-const modalNumber =
-    document.getElementById("modal-number");
-
-const modalTitle =
-    document.getElementById("modal-title");
-
-const modalClose =
-    document.getElementById("modal-close");
-
-
-const memories =
-    document.querySelectorAll(".memory");
-
-
-memories.forEach(memory => {
-
-    memory.addEventListener(
-        "click",
-        () => {
-
-            const image =
-                memory.dataset.image;
-
-            const number =
-                memory.dataset.number;
-
-            const title =
-                memory.dataset.title;
-
-
-            modalImage.src = image;
-
-            modalImage.alt = title;
-
-            modalNumber.textContent =
-                number;
-
-            modalTitle.textContent =
-                title;
-
-
-            photoModal.classList.add("open");
-
-            document.body.classList.add(
-                "modal-open"
-            );
 
         }
     );
 
-});
+
+    pageCurrent.textContent =
+        String(
+            Math.min(current, 5)
+        ).padStart(2, "0");
+
+}
 
 
-function fecharModal() {
+window.addEventListener(
+    "scroll",
+    updatePageProgress,
+    { passive: true }
+);
 
-    photoModal.classList.remove("open");
+updatePageProgress();
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+const timelineCards =
+    document.querySelectorAll(
+        ".timeline-card"
+    );
+
+const timelineProgress =
+    document.getElementById(
+        "timelineProgress"
+    );
+
+
+function updateTimeline() {
+
+    timelineCards.forEach(
+        card => {
+
+            const rect =
+                card.getBoundingClientRect();
+
+            const center =
+                window.innerHeight * .5;
+
+            const distance =
+                Math.abs(
+                    rect.top -
+                    center
+                );
+
+            if (distance < 220) {
+
+                timelineCards.forEach(
+                    item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                );
+
+                card.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+
+    const timeline =
+        document.querySelector(
+            ".timeline-track"
+        );
+
+    if (!timeline) return;
+
+
+    const rect =
+        timeline.getBoundingClientRect();
+
+    const visible =
+        Math.max(
+            0,
+            Math.min(
+                rect.height,
+                window.innerHeight * .5 -
+                rect.top
+            )
+        );
+
+    const percentage =
+        rect.height > 0
+            ? visible / rect.height
+            : 0;
+
+    timelineProgress.style.height =
+        `${percentage * 100}%`;
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    updateTimeline,
+    { passive: true }
+);
+
+updateTimeline();
+
+
+/* =========================================================
+   PHOTO VIEWER
+========================================================= */
+
+const photoViewer =
+    document.getElementById("photoViewer");
+
+const viewerImage =
+    document.getElementById("viewerImage");
+
+const viewerTitle =
+    document.getElementById("viewerTitle");
+
+const viewerClose =
+    document.getElementById("viewerClose");
+
+
+const photoButtons =
+    document.querySelectorAll(
+        ".image-button"
+    );
+
+
+function openViewer(button) {
+
+    const photo =
+        button.dataset.photo;
+
+    const title =
+        button.dataset.title;
+
+
+    viewerImage.src = photo;
+
+    viewerImage.alt = title;
+
+    viewerTitle.textContent =
+        title;
+
+
+    photoViewer.classList.add("open");
+
+    document.body.classList.add("locked");
+
+}
+
+
+function closeViewer() {
+
+    photoViewer.classList.remove("open");
 
     document.body.classList.remove(
-        "modal-open"
+        "locked"
     );
 
 }
 
 
-modalClose.addEventListener(
-    "click",
-    fecharModal
+photoButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+                openViewer(button);
+            }
+        );
+
+    }
 );
 
 
-photoModal.addEventListener(
+viewerClose.addEventListener(
+    "click",
+    closeViewer
+);
+
+
+photoViewer.addEventListener(
     "click",
     event => {
 
         if (
             event.target ===
-            photoModal
+            photoViewer
         ) {
-            fecharModal();
+            closeViewer();
         }
 
     }
@@ -435,68 +547,65 @@ photoModal.addEventListener(
 
 
 /* =========================================================
-   SEGREDO
+   SECRET
 ========================================================= */
 
-const secretButton =
-    document.getElementById("secret-button");
+const secret =
+    document.getElementById("secret");
 
-const secretModal =
-    document.getElementById("secret-modal");
+const secretTrigger =
+    document.getElementById(
+        "secretTrigger"
+    );
 
 const secretClose =
-    document.getElementById("secret-close");
+    document.getElementById(
+        "secretClose"
+    );
 
 
-secretButton.addEventListener(
+function openSecret() {
+
+    secret.classList.add("open");
+
+    document.body.classList.add(
+        "locked"
+    );
+
+}
+
+
+function closeSecret() {
+
+    secret.classList.remove("open");
+
+    document.body.classList.remove(
+        "locked"
+    );
+
+}
+
+
+secretTrigger.addEventListener(
     "click",
-    () => {
-
-        secretModal.classList.add(
-            "open"
-        );
-
-        document.body.classList.add(
-            "modal-open"
-        );
-
-    }
+    openSecret
 );
-
 
 secretClose.addEventListener(
     "click",
-    () => {
-
-        secretModal.classList.remove(
-            "open"
-        );
-
-        document.body.classList.remove(
-            "modal-open"
-        );
-
-    }
+    closeSecret
 );
 
 
-secretModal.addEventListener(
+secret.addEventListener(
     "click",
     event => {
 
         if (
             event.target ===
-            secretModal
+            secret
         ) {
-
-            secretModal.classList.remove(
-                "open"
-            );
-
-            document.body.classList.remove(
-                "modal-open"
-            );
-
+            closeSecret();
         }
 
     }
@@ -504,53 +613,99 @@ secretModal.addEventListener(
 
 
 /* =========================================================
-   TECLA ESC
+   ESC
 ========================================================= */
 
 document.addEventListener(
     "keydown",
     event => {
 
-        if (event.key === "Escape") {
-
-            fecharModal();
-
-            secretModal.classList.remove(
-                "open"
-            );
-
-            fecharMenu();
-
+        if (event.key !== "Escape") {
+            return;
         }
+
+        closeMenu();
+        closeViewer();
+        closeSecret();
 
     }
 );
 
 
 /* =========================================================
-   PARTÍCULAS
+   PARALLAX SUAVE
+========================================================= */
+
+if (
+    !prefersReducedMotion &&
+    window.innerWidth > 700
+) {
+
+    const heroTitle =
+        document.querySelector(
+            ".hero h1"
+        );
+
+    const heroOrbit =
+        document.querySelector(
+            ".orbit-one"
+        );
+
+
+    window.addEventListener(
+        "mousemove",
+        event => {
+
+            const x =
+                (event.clientX /
+                    window.innerWidth -
+                    .5) *
+                2;
+
+            const y =
+                (event.clientY /
+                    window.innerHeight -
+                    .5) *
+                2;
+
+
+            heroTitle.style.transform =
+                `translate(${x * 6}px, ${y * 4}px)`;
+
+
+            heroOrbit.style.transform =
+                `translate(${x * 15}px, ${y * 15}px)`;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   STARFIELD
 ========================================================= */
 
 const canvas =
-    document.getElementById("particles");
+    document.getElementById("stars");
 
 const ctx =
     canvas.getContext("2d");
 
 
-let particles = [];
+let width = window.innerWidth;
+let height = window.innerHeight;
 
-let particleWidth = window.innerWidth;
-let particleHeight = window.innerHeight;
+let stars = [];
 
 
 function resizeCanvas() {
 
-    particleWidth =
+    width =
         canvas.width =
         window.innerWidth;
 
-    particleHeight =
+    height =
         canvas.height =
         window.innerHeight;
 
@@ -559,121 +714,119 @@ function resizeCanvas() {
 
 resizeCanvas();
 
-
 window.addEventListener(
     "resize",
     resizeCanvas
 );
 
 
-class Particle {
+const starCount =
+    window.innerWidth < 700
+        ? 45
+        : 90;
 
-    constructor() {
 
-        this.x =
+for (
+    let i = 0;
+    i < starCount;
+    i++
+) {
+
+    stars.push({
+
+        x:
             Math.random() *
-            particleWidth;
+            width,
 
-        this.y =
+        y:
             Math.random() *
-            particleHeight;
+            height,
 
-        this.size =
-            Math.random() * 1.5 + .3;
+        radius:
+            Math.random() * 1.2 + .2,
 
-        this.speed =
-            Math.random() * .25 + .05;
+        speed:
+            Math.random() * .15 + .03,
 
-        this.opacity =
-            Math.random() * .35;
+        alpha:
+            Math.random() * .6 + .1
 
-    }
+    });
+
+}
 
 
-    update() {
+function drawStars() {
 
-        this.y -= this.speed;
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
 
-        if (this.y < -10) {
 
-            this.y =
-                particleHeight + 10;
+    stars.forEach(star => {
 
-            this.x =
+        star.y -= star.speed;
+
+
+        if (star.y < 0) {
+
+            star.y = height;
+
+            star.x =
                 Math.random() *
-                particleWidth;
+                width;
 
         }
 
-    }
-
-
-    draw() {
 
         ctx.beginPath();
 
         ctx.arc(
-            this.x,
-            this.y,
-            this.size,
+            star.x,
+            star.y,
+            star.radius,
             0,
             Math.PI * 2
         );
 
         ctx.fillStyle =
-            `rgba(255,210,225,${this.opacity})`;
+            `rgba(255,220,230,${star.alpha})`;
 
         ctx.fill();
 
-    }
-
-}
-
-
-const particleAmount =
-    window.innerWidth < 700
-        ? 35
-        : 70;
-
-
-for (
-    let i = 0;
-    i < particleAmount;
-    i++
-) {
-
-    particles.push(
-        new Particle()
-    );
-
-}
-
-
-function animateParticles() {
-
-    ctx.clearRect(
-        0,
-        0,
-        particleWidth,
-        particleHeight
-    );
-
-
-    particles.forEach(
-        particle => {
-
-            particle.update();
-            particle.draw();
-
-        }
-    );
+    });
 
 
     requestAnimationFrame(
-        animateParticles
+        drawStars
     );
 
 }
 
 
-animateParticles();
+if (!prefersReducedMotion) {
+    drawStars();
+}
+
+
+/* =========================================================
+   IMAGENS — FEEDBACK VISUAL
+========================================================= */
+
+document
+    .querySelectorAll(".image-button img")
+    .forEach(image => {
+
+        image.addEventListener(
+            "load",
+            () => {
+                image.parentElement.classList.add(
+                    "loaded"
+                );
+            }
+        );
+
+    });
